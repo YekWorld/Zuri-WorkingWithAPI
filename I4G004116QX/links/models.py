@@ -1,6 +1,6 @@
 from operator import mod
 from django.db import models
-from django.contrib.admin.models import User
+from django.contrib.auth.models import User
 from django.forms import BooleanField
 
 # Create your models here.
@@ -15,9 +15,9 @@ class link(models.Model):
     target_url = models.URLField(max_length=200)
     discription = models.CharField(max_length=200)
     identifier = models.SlugField(max_length=20)
-    author = models.ForeignKey('User', on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_date = models.DateTimeField
-    active = BooleanField(True)
+    active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title
+        return self.target_url
